@@ -68,3 +68,14 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'Get genre' endpoint
+  public getGenre(name: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'genres/' + name, {
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
