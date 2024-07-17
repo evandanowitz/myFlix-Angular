@@ -101,3 +101,14 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'Add a movie to favorite movies' endpoint
+  public addToFavMovies(Username: any, MovieID: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.post(apiUrl + 'users/' + Username + '/movies/' + MovieID, null, {
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
