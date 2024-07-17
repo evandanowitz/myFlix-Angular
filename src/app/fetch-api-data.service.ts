@@ -46,3 +46,14 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'Get one movie' endpoint
+  public getOneMovie(title: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies/' + title, {
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
