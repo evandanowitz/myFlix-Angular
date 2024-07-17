@@ -90,3 +90,14 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'Get favorite movies for a user' endpoint
+  public getFavoriteMovies(Username: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'users/' + Username + 'movies/', {
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
+    }).pipe( // this endpoint does not exist in movie_api, but probably should.
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
