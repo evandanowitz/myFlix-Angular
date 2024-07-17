@@ -145,3 +145,9 @@ export class FetchApiDataService {
     );
   }
 
+  // Non-typed response extraction. @param { Object } res - API response. @returns { any } - Extracted response data.
+  private extractResponseData(res: Object): any { // 'res' parameter expected to be an object with data type 'any'. Reps response object from HTTP request.
+    const body = res; // assign the 'res' parameter (the response object) to 'body' variable
+    return body || {}; // returns the 'body' variable. If 'body' is falsy (null or undefined), it returns an empty object {}. Will always return a valid object.
+  }
+
