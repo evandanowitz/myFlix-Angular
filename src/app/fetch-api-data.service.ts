@@ -134,3 +134,14 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'Delete a movie from favorite movies' endpoint
+  public deleteFromFavMovies(Username: any, MovieID: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.delete(apiUrl + 'users/' + Username + '/movies/' + MovieID, {
+      headers: new HttpHeaders({ Authorization: 'Bearer ' + token })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
