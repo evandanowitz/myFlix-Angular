@@ -26,3 +26,12 @@ export class FetchApiDataService {
     );
   }
 
+  // Logic for API call for 'User login' endpoint.
+  public userLogin(userDetails: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log(userDetails);
+    return this.http.post(apiUrl + 'users', userDetails).pipe(
+      catchError(this.handleError)
+    );
+  }
+
