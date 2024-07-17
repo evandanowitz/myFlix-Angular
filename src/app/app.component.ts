@@ -14,4 +14,9 @@ export class AppComponent {
 
   constructor(private http: HttpClient) { }
 
+  getData() {
+    this.http.get('https://myflix-db-movie-app-af5513e7733f.herokuapp.com/').subscribe(response => {
+      console.log(response);
+    });
+  }
 }
