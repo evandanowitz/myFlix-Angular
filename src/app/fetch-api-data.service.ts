@@ -151,3 +151,18 @@ export class FetchApiDataService {
     return body || {}; // returns the 'body' variable. If 'body' is falsy (null or undefined), it returns an empty object {}. Will always return a valid object.
   }
 
+  // Handles HTTP errors. @param { HttpErrorResponse } error - HTTP error response. @returns { any } - Error details.
+  private handleError(error: HttpErrorResponse): any { // parameter 'error' is of type 'HttpErrorResponse', which represents the error response from HTTP req.
+    if (error.error instanceof ErrorEvent) { // checks if the error is a client-side or network error. 'ErrorEvent' is used for client-side errors.
+      console.error('Some error occurred:', error.error.message); // logs error message to console. Logs the error message from the 'ErrorEvent'.
+    } else { // if the error is a server-side error...
+      console.error( // executes the following error in the console:
+        `Error Status code ${error.status}, ` + // logs the HTTP status code of the error.
+        `Error body is: ${error.error}` // logs the body of the error message.
+      );
+    }
+    return throwError(() => // a function from RxJS that returns an observable that emits an error.
+      new Error('Something bad happened; please try again later.') // Creates a new error with a specific message to be thrown.
+    );
+  }
+}
